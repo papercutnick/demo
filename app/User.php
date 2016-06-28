@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','netid','first_name','last_name',
     ];
 
     /**
@@ -23,4 +23,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * The groups that user owns.
+     */
+    public function groupsAsOwner()
+    {
+        return $this->belongsToMany('App\Group','group_owner')->withTimestamps();
+    }
+
+    /**
+     * The groups that user belongs.
+     */
+    public function groupsAsOwner()
+    {
+        return $this->belongsToMany('App\Group','group_member')->withTimestamps();
+    }
 }
