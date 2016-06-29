@@ -7,11 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Group extends Model
 {
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'description',
+    ];
+
+
+    /**
      * Get the owners for the group.
      */
     public function owners()
     {
-        return $this->belongsToMany('App\User','group_owner');
+        return $this->belongsToMany('App\User','group_owner')->withTimestamps();
     }
 
     /**
@@ -19,6 +29,6 @@ class Group extends Model
      */
     public function members()
     {
-        return $this->belongsToMany('App\User','group_member');
+        return $this->belongsToMany('App\User','group_member')->withTimestamps();
     }
 }

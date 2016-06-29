@@ -33,9 +33,9 @@ class User extends Authenticatable
     }
 
     /**
-     * The groups that user belongs.
+     * The groups that user belongs to.
      */
-    public function groupsAsOwner()
+    public function groupsAsMember()
     {
         return $this->belongsToMany('App\Group','group_member')->withTimestamps();
     }

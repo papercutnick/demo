@@ -10,7 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-use App\GroupOwner;
+use App\Group;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,8 +18,17 @@ Route::get('/', function () {
 
 
 Route::get('/Modeltest', function () {
-	$group = new GroupOwner;
-	$group->first_name='test';
+	DB::beginTransaction();
+	$group = new Group(['name'=>'test1','description'=>'iweri']);
 	$group->save();
+	//$group->first_name='test';
+	$group->owners()->saveMany([
+		new App\User(['name' => 'owner1','netid'=>'udf345']),
+		new App\User(['name' => 'owner2','netid'=>'dfl455']),
+	]);
+	DB::commit();
+
     return view('welcome');
 });
+
+Route::resource('group', 'GroupController');
