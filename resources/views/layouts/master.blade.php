@@ -7,7 +7,7 @@
 
         <link rel="stylesheet" href="{{ elixir('assets/css/app.css') }}">
         
-        <style>
+        <!--style>
             html, body {
                 height: 100%;
             }
@@ -35,7 +35,7 @@
             .title {
                 font-size: 96px;
             }
-        </style>
+        </style-->
     </head>
     <body>
         <div class="container">

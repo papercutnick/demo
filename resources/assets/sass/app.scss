@@ -2,15 +2,16 @@
 
 // import all of the foundation mixins, but none of the actual code
 // this is coming from node_modules/foundation-sites/scss/foundation.scss
+@import 'settings/settings';
 @import 'foundation';
 
 // These will actually import the foundation elements code
 
 // Everything
-// @include foundation-everything;
+@include foundation-everything;
 
 // Individual Components
-@include foundation-global-styles; // normalize.scss
+//@include foundation-global-styles; // normalize.scss
 // @include foundation-accordion-menu;
 // @include foundation-accordion;
 // @include foundation-badge;
@@ -57,7 +58,7 @@
 // @include foundation-form-select;
 // @include foundation-form-text;
 // @include foundation-everything($flex: false);
-// @include foundation-grid;
+//@include foundation-grid;
 // @include foundation-flex-grid;
 // @include foundation-text-alignment;
 // @include foundation-typography-base;
