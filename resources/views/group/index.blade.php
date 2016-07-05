@@ -8,3 +8,7 @@
 
     {{ $groups->links()}}
 @endsection
+
+@section('script')
+    $(document).foundation();
+@endsection
