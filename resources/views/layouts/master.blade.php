@@ -6,7 +6,7 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
         <link rel="stylesheet" href="{{ elixir('assets/css/app.css') }}">
-
+        
         <style>
             html, body {
                 height: 100%;
@@ -39,9 +39,7 @@
     </head>
     <body>
         <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
-            </div>
+            @yield('content')
         </div>
     </body>
 

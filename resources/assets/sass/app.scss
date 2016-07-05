@@ -1,2 +1,66 @@
-// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@charset 'UTF-8';
 
+// import all of the foundation mixins, but none of the actual code
+// this is coming from node_modules/foundation-sites/scss/foundation.scss
+@import 'foundation';
+
+// These will actually import the foundation elements code
+
+// Everything
+// @include foundation-everything;
+
+// Individual Components
+@include foundation-global-styles; // normalize.scss
+// @include foundation-accordion-menu;
+// @include foundation-accordion;
+// @include foundation-badge;
+// @include foundation-breadcrumbs;
+// @include foundation-button-group;
+// @include foundation-button;
+// @include foundation-callout;
+// @include foundation-close-button;
+// @include foundation-drilldown-menu;
+// @include foundation-dropdown-menu;
+// @include foundation-dropdown;
+// @include foundation-flex-video;
+// @include foundation-flex-classes;
+// @include foundation-float-classes;
+// @include foundation-label;
+// @include foundation-media-object;
+// @include foundation-menu-icon;
+// @include foundation-menu;
+// @include foundation-off-canvas;
+// @include foundation-orbit;
+// @include foundation-pagination;
+// @include foundation-progress-bar;
+// @include foundation-reveal;
+// @include foundation-slider;
+// @include foundation-sticky;
+// @include foundation-switch;
+// @include foundation-table($nest: false);
+// @include foundation-tabs;
+// @include foundation-thumbnail;
+// @include foundation-title-bar;
+// @include foundation-tooltip;
+// @include foundation-top-bar;
+// @include foundation-visibility-classes;
+// @include foundation-form-checkbox;
+// @include foundation-form-error;
+// @include foundation-form-fieldset;
+// @include foundation-forms;
+// @include foundation-form-helptext;
+// @include foundation-form-prepostfix;
+// @include foundation-form-label;
+// @include foundation-meter-element;
+// @include foundation-progress-element;
+// @include foundation-range-input;
+// @include foundation-form-select;
+// @include foundation-form-text;
+// @include foundation-everything($flex: false);
+// @include foundation-grid;
+// @include foundation-flex-grid;
+// @include foundation-text-alignment;
+// @include foundation-typography-base;
+// @include foundation-typography-helpers;
+// @include foundation-print-styles;
+// @include foundation-typography;
