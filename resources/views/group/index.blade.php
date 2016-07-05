@@ -15,14 +15,26 @@
 		<tr>
 			<td><a href="#">edit</a> / <a href="#">delete</a></td>
 			<td>{{ $group->name }}</td>
-			<td></td>
+			<td>
+				<?php
+					$owners = $group->owners()->get();
+					$ownerName = '';
+
+					foreach ($owners as $owner){
+						$ownerName .= ($owner->name).';';
+					}
+				?>
+
+				{{ str_limit($ownerName,20) }}
+			</td>
 			<td>{{ str_limit($group->description,20) }}</td>
 		</tr>
 		@endforeach
 	</tbody>
 </table>
 
-{{ $groups->links()}}
+@include('pagination.default', ['paginator' => $groups])
+
 @endsection
 
 @section('script')
