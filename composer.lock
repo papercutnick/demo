@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "47bac3265bd8beee5bccdaa42e6ff1b6",
-    "content-hash": "31e7290cd28e87e615c7288ecdf706ef",
+    "hash": "4db592abd723f2b5e2b12efc7172dce0",
+    "content-hash": "e81ea4d85acb853166ad4c0d0fa8d4d8",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -488,6 +488,60 @@
                 "laravel"
             ],
             "time": "2016-06-17 19:25:12"
+        },
+        {
+            "name": "laravelcollective/html",
+            "version": "v5.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LaravelCollective/html.git",
+                "reference": "3a312d39ffe37da0f57b602618b61fd07c1fcec5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/3a312d39ffe37da0f57b602618b61fd07c1fcec5",
+                "reference": "3a312d39ffe37da0f57b602618b61fd07c1fcec5",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/http": "5.2.*",
+                "illuminate/routing": "5.2.*",
+                "illuminate/session": "5.2.*",
+                "illuminate/support": "5.2.*",
+                "illuminate/view": "5.2.*",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "illuminate/database": "5.2.*",
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Collective\\Html\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                },
+                {
+                    "name": "Adam Engebretson",
+                    "email": "adam@laravelcollective.com"
+                }
+            ],
+            "description": "HTML and Form Builders for the Laravel Framework",
+            "homepage": "http://laravelcollective.com",
+            "time": "2016-01-27 22:29:54"
         },
         {
             "name": "league/flysystem",
@@ -1896,56 +1950,6 @@
     ],
     "packages-dev": [
         {
-            "name": "chromabits/nucleus",
-            "version": "v0.4.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/chromabits/nucleus.git",
-                "reference": "37e11b98d0b851f4c01578ce73eef6b5d2342fe5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/chromabits/nucleus/zipball/37e11b98d0b851f4c01578ce73eef6b5d2342fe5",
-                "reference": "37e11b98d0b851f4c01578ce73eef6b5d2342fe5",
-                "shasum": ""
-            },
-            "require": {
-                "lstrojny/phpunit-function-mocker": "0.2.*"
-            },
-            "require-dev": {
-                "mockery/mockery": "0.9.*",
-                "phpunit/phpunit": "*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.5-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Chromabits\\Nucleus\\": "src/Chromabits/Nucleus"
-                },
-                "files": [
-                    "src/Chromabits/Nucleus/Support/globals.php",
-                    "src/Chromabits/Nucleus/Support/intl.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Eduardo Trujillo",
-                    "email": "ed@chromabits.com"
-                }
-            ],
-            "description": "Some core PHP utilities",
-            "abandoned": "sellerlabs/nucleus",
-            "time": "2015-12-16 09:42:47"
-        },
-        {
             "name": "doctrine/instantiator",
             "version": "1.0.5",
             "source": {
@@ -2091,46 +2095,6 @@
                 "test"
             ],
             "time": "2015-05-11 14:41:42"
-        },
-        {
-            "name": "lstrojny/phpunit-function-mocker",
-            "version": "0.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lstrojny/phpunit-function-mocker.git",
-                "reference": "b4faba10b7322e52c0254c0a3dc88d98d140eeec"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lstrojny/phpunit-function-mocker/zipball/b4faba10b7322e52c0254c0a3dc88d98d140eeec",
-                "reference": "b4faba10b7322e52c0254c0a3dc88d98d140eeec",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "PHPUnit_Extension_FunctionMocker": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Lars Strojny",
-                    "email": "lstrojny@php.net",
-                    "homepage": "http://usrportage.de"
-                }
-            ],
-            "description": "Allows mocking otherwise untestable PHP functions through the use of namespaces",
-            "time": "2014-01-19 22:48:12"
         },
         {
             "name": "mockery/mockery",

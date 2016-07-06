@@ -13,7 +13,11 @@
 	<tbody>
 		@foreach ($groups as $group)
 		<tr>
-			<td><a href="#">edit</a> / <a href="#">delete</a></td>
+			<td>
+                <a href="#">edit</a> / <a href="#" onclick="$(this).next('form').submit()">delete</a>
+                {{ Form::open(array('action' => array('GroupController@destroy', $group->id), 'method' => 'DELETE')) }}
+                {{ Form::close() }}
+            </td>
 			<td>{{ $group->name }}</td>
 			<td>
 				<?php
@@ -35,8 +39,20 @@
 
 @include('pagination.default', ['paginator' => $groups])
 
+{{ Form::open(array('action' => array('GroupController@destroy', 1), 'method' => 'DELETE')) }}
+{{ Form::close() }}
+
+{{-- route('group.destroy', ['group' => $group->id, '_method'=>'DELETE']) --}}
+
 @endsection
 
 @section('script')
-$(document).foundation();
+<script>
+    $(document).foundation();
+
+    //function deleteGroup(){
+        //alert(id);
+        //$(this).next('form').submit();
+    //}
+</script>
 @endsection

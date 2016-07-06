@@ -44,7 +44,7 @@
     </body>
 
     <script src="{{ elixir('assets/js/foundation.js') }}"></script>
-    <script>
-        @yield('script')
-    </script>
+    
+    @yield('script')
+    
 </html>
