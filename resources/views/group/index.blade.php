@@ -1,6 +1,10 @@
 @extends('layouts.master')
 
 @section('content')
+
+
+<a href="{{ route('group.create') }}">Create New Group</a>
+
 <table class="hover">
 	<thead>
 		<tr>
@@ -25,7 +29,7 @@
 					$ownerName = '';
 
 					foreach ($owners as $owner){
-						$ownerName .= ($owner->name).';';
+						$ownerName .= ($owner->first_name).';';
 					}
 				?>
 
@@ -37,22 +41,13 @@
 	</tbody>
 </table>
 
-@include('pagination.default', ['paginator' => $groups])
+<a href="{{ route('group.create') }}">Create New Group</a>
 
-{{ Form::open(array('action' => array('GroupController@destroy', 1), 'method' => 'DELETE')) }}
-{{ Form::close() }}
+@include('pagination.default', ['paginator' => $groups])
 
 {{-- route('group.destroy', ['group' => $group->id, '_method'=>'DELETE']) --}}
 
 @endsection
 
 @section('script')
-<script>
-    $(document).foundation();
-
-    //function deleteGroup(){
-        //alert(id);
-        //$(this).next('form').submit();
-    //}
-</script>
 @endsection

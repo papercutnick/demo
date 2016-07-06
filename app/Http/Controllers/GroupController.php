@@ -10,6 +10,8 @@ use App\Group;
 
 use App\User;
 
+use DB;
+
 class GroupController extends Controller
 {
     /**
@@ -19,7 +21,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups = Group::paginate(1);
+        $groups = Group::paginate(15);
 
 
         return view('group.index', ['groups' => $groups]);
@@ -32,7 +34,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        //
+        return view('group.form');
     }
 
     /**
@@ -43,7 +45,24 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the request...
+
+        $netID = $request->input("_netID");
+        $firstName = $request->input("_firstName");
+        $lastName = $request->input("_lastName");
+
+        DB::beginTransaction();
+        $group = Group::create($request->only(['name', 'description']));
+
+        foreach($netID as $key => $value ) {
+            $group->owners()->save(User::create(['netid' => $netID[$key],
+                                                 'first_name'=>$firstName[$key], 
+                                                 'first_name'=>$lastName[$key]]));
+        }
+
+        DB::commit();
+
+        return redirect()->route('group.index');
     }
 
     /**
@@ -88,6 +107,7 @@ class GroupController extends Controller
      */
     public function destroy($id)
     {
-        return view('welcome');
+        
+        return redirect()->route('group.index');
     }
 }

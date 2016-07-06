@@ -37,12 +37,12 @@ elixir(function(mix) {
         // check the Foundation docs for components requirements
         // paths.NODE + 'foundation-sites/js/foundation.util.box.js',
         // paths.NODE + 'foundation-sites/js/foundation.util.keyboard.js',
-        // paths.NODE + 'foundation-sites/js/foundation.util.motion.js',
+        paths.NODE + 'foundation-sites/js/foundation.util.motion.js',
         // paths.NODE + 'foundation-sites/js/foundation.util.nest.js',
         // paths.NODE + 'foundation-sites/js/foundation.util.timerAndImageLoader.js',
         // paths.NODE + 'foundation-sites/js/foundation.util.touch.js',
-        // paths.NODE + 'foundation-sites/js/foundation.util.triggers.js',
-        // paths.NODE + 'foundation-sites/js/foundation.abide.js',
+        paths.NODE + 'foundation-sites/js/foundation.util.triggers.js',
+        paths.NODE + 'foundation-sites/js/foundation.abide.js',
         // paths.NODE + 'foundation-sites/js/foundation.accordion.js',
         // paths.NODE + 'foundation-sites/js/foundation.accordionMenu.js',
         // paths.NODE + 'foundation-sites/js/foundation.drilldown.js',
@@ -59,7 +59,7 @@ elixir(function(mix) {
         // paths.NODE + 'foundation-sites/js/foundation.slider.js',
         // paths.NODE + 'foundation-sites/js/foundation.sticky.js',
         // paths.NODE + 'foundation-sites/js/foundation.tabs.js',
-        // paths.NODE + 'foundation-sites/js/foundation.toggler.js',
+        paths.NODE + 'foundation-sites/js/foundation.toggler.js',
         // paths.NODE + 'foundation-sites/js/foundation.tooltip.js',
     ], paths.DESTINATION + 'js/foundation.js', './');
 	

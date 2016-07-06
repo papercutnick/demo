@@ -40,11 +40,15 @@
     <body>
         <div class="container">
             @yield('content')
+
         </div>
+
     </body>
 
     <script src="{{ elixir('assets/js/foundation.js') }}"></script>
-    
+    <script>
+        $(document).foundation();
+    </script>
     @yield('script')
     
 </html>
