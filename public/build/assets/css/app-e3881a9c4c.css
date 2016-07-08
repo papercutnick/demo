@@ -1508,7 +1508,7 @@ textarea[readonly] {
 
 [type='submit'],
 [type='button'] {
-  border-radius: 10px;
+  border-radius: 0;
   -webkit-appearance: none;
   -moz-appearance: none; }
 
@@ -1678,7 +1678,7 @@ select {
   transition: background-color 0.25s ease-out, color 0.25s ease-out;
   vertical-align: middle;
   border: 1px solid transparent;
-  border-radius: 10px;
+  border-radius: 0;
   padding: 0.85em 1em;
   margin: 0 0 1rem 0;
   font-size: 0.9rem;

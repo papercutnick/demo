@@ -12,6 +12,8 @@ use App\User;
 
 use DB;
 
+use Debugbar;
+
 class GroupController extends Controller
 {
     /**
@@ -34,7 +36,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view('group.form');
+        return view('group.form', ['action' => 'create']);
     }
 
     /**
@@ -57,7 +59,7 @@ class GroupController extends Controller
         foreach($netID as $key => $value ) {
             $group->owners()->save(User::create(['netid' => $netID[$key],
                                                  'first_name'=>$firstName[$key], 
-                                                 'first_name'=>$lastName[$key]]));
+                                                 'last_name'=>$lastName[$key]]));
         }
 
         DB::commit();
@@ -84,7 +86,11 @@ class GroupController extends Controller
      */
     public function edit($id)
     {
-        //
+        $group = Group::find($id);
+
+        //Debugbar::info($group);
+
+        return view('group.form', ['action' => 'edit', 'group' => $group]);
     }
 
     /**
@@ -96,7 +102,26 @@ class GroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Validate the request...
+        $group = Group::find($id);
+
+        $netID = $request->input("_netID");
+        $firstName = $request->input("_firstName");
+        $lastName = $request->input("_lastName");
+
+        DB::beginTransaction();
+        $group->update($request->only(['name', 'description']));
+
+        $group->owners()->detach();
+        foreach($netID as $key => $value ) {
+            $group->owners()->save(User::create(['netid' => $netID[$key],
+                                                 'first_name'=>$firstName[$key], 
+                                                 'last_name'=>$lastName[$key]])); // no unique constraint check
+        }
+
+        DB::commit();
+
+        return redirect()->route('group.index');
     }
 
     /**
@@ -107,7 +132,12 @@ class GroupController extends Controller
      */
     public function destroy($id)
     {
-        
+        Group::destroy($id);
         return redirect()->route('group.index');
+    }
+
+    private function setGroup(Request $request)
+    {
+
     }
 }

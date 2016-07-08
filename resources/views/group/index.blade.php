@@ -18,7 +18,8 @@
 		@foreach ($groups as $group)
 		<tr>
 			<td>
-                <a href="#">edit</a> / <a href="#" onclick="$(this).next('form').submit()">delete</a>
+                <a href="{{route('group.edit', ['group' => $group->id])}}">edit</a>
+                / <a href="#" onclick="$(this).next('form').submit()">delete</a>
                 {{ Form::open(array('action' => array('GroupController@destroy', $group->id), 'method' => 'DELETE')) }}
                 {{ Form::close() }}
             </td>
