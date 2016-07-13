@@ -3,16 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-
 use App\Group;
-
 use App\User;
-
 use DB;
-
 use Debugbar;
+use App\Http\Requests\GroupPostRequest;
 
 class GroupController extends Controller
 {
@@ -45,10 +41,8 @@ class GroupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GroupPostRequest $request)
     {
-        // Validate the request...
-
         $netID = $request->input("_netID");
         $firstName = $request->input("_firstName");
         $lastName = $request->input("_lastName");
@@ -100,7 +94,7 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(GroupPostRequest $request, $id)
     {
         // Validate the request...
         $group = Group::find($id);

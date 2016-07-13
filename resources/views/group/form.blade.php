@@ -2,6 +2,8 @@
 
 @section('content')
 
+@include('errors.default')
+
 @if ($action === 'create')
 {{ Form::open(array('route' => 'group.store')) }}
 @else
@@ -19,6 +21,7 @@
 				</div>
 				<div class="small-8 columns">
 					{{ Form::text('name') }}
+					<span class="form-error">This field is required.</span>
 				</div>
 			</div>
 		</div>
@@ -93,22 +96,41 @@
 @section('script')
 <script>
 	$(function(){
-  		@if ($action === 'edit')
-  			@foreach ($group->owners()->get() as $owner)
-				addRow('{{$owner->netid}}', '{{$owner->first_name}}', '{{$owner->last_name}}');
-			@endforeach
-  		@endif
+		@if (count($errors) > 0)
+			<?php
+				$oldInput = Session::get('_old_input');
+				if(array_key_exists('_netID', $oldInput)){
+					$netID = $oldInput["_netID"];
+        			$firstName =  $oldInput["_firstName"];
+        			$lastName =  $oldInput["_lastName"];
+        			foreach ($netID as $key => $value){ ?>
+        				addRow('{{$netID[$key]}}', '{{$firstName[$key]}}', '{{$lastName[$key]}}');
+        	<?php		}
+        		}
+			?>
+		@else
+	  		@if ($action === 'edit')
+	  			@foreach ($group->owners()->get() as $owner)
+					addRow('{{$owner->netid}}', '{{$owner->first_name}}', '{{$owner->last_name}}');
+				@endforeach
+	  		@endif
+	  	@endif
+
+	  	//initialize js validation
+	  	//$("form").prop({"data-abide":"data-abide","novalidate":"novalidate"});
+	  	$("form").prop("data-abide","data-abide");
+	  	$("[type=text]").prop("required","required");
 	});
 
      function addRow(netID, firstName, lastName){
      	var link = "<a href='#'' onclick='deleteRow(this)'>delete</a>";
      	
-     	var row = "<tr><td>"+netID
-     			  +"<input type='hidden' name='_netID[]' value='"+netID+"' />"
-     			  +"</td><td>"+firstName
-     			  +"<input type='hidden' name='_firstName[]' value='"+firstName+"' />"
-     			  +"</td><td>"+lastName
-     			  +"<input type='hidden' name='_lastName[]' value='"+lastName+"' />"
+     	var row = "<tr><td>"
+     			  +"<input type='text' name='_netID[]' value='"+netID+"' />"
+     			  +"</td><td>"
+     			  +"<input type='text' name='_firstName[]' value='"+firstName+"' />"
+     			  +"</td><td>"
+     			  +"<input type='text' name='_lastName[]' value='"+lastName+"' />"
      			  +"</td><td>"+link
      			  +"</td></tr>";
      	$("tbody").append(row);
