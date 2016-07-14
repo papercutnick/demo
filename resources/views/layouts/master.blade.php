@@ -16,9 +16,13 @@
     </body>
 
     <script src="{{ elixir('assets/js/foundation.js') }}"></script>
+
+    @yield('prescript')
+
     <script>
         $(document).foundation();
     </script>
-    @yield('script')
+    
+    @yield('postscript')
     
 </html>

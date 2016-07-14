@@ -10,7 +10,9 @@
 
 {{ Form::model($group, array('route' => array('group.update', $group->id), 'method' => 'PUT')) }}
 @endif
-
+<div data-abide-error class="alert callout" style="display: none;">
+    <p><i class="fi-alert"></i> There are some errors in your form.</p>
+  </div>
 <div class="row">
 	<fieldset class="fieldset">
 		<legend>Group Information</legend>
@@ -86,14 +88,15 @@
 		</tbody>
 	</table>
 
-	{{ Form::submit('Submit', array('class' => 'hollow button')) }}
+	{{ Form::button('Submit', array('class' => 'hollow button',
+		'onclick'=>'check(this)')) }}
 </div>
 
 {{ Form::close() }}
 
 @endsection
 
-@section('script')
+@section('prescript')
 <script>
 	$(function(){
 		@if (count($errors) > 0)
@@ -117,8 +120,7 @@
 	  	@endif
 
 	  	//initialize js validation
-	  	//$("form").prop({"data-abide":"data-abide","novalidate":"novalidate"});
-	  	$("form").prop("data-abide","data-abide");
+	  	$("form:first").attr({"data-abide":"", "id":"testtest"});
 	  	$("[type=text]").prop("required","required");
 	});
 
@@ -138,6 +140,17 @@
 
      function deleteRow(obj){
      	$(obj).parents("tr").remove();
+     }
+     
+</script>
+@endsection
+
+@section('postscript')
+<script>
+	function check(obj){
+     	//$(obj).parents("form").foundation("validateForm");
+     	$("#testtest").foundation("validateForm");
+     	return false;
      }
 </script>
 @endsection

@@ -35,6 +35,7 @@ elixir(function(mix) {
 
         // Feel free to add or remove components at your discretion
         // check the Foundation docs for components requirements
+        paths.NODE + 'foundation-sites/js/foundation.abide.js',
         // paths.NODE + 'foundation-sites/js/foundation.util.box.js',
         // paths.NODE + 'foundation-sites/js/foundation.util.keyboard.js',
         paths.NODE + 'foundation-sites/js/foundation.util.motion.js',
@@ -42,7 +43,6 @@ elixir(function(mix) {
         // paths.NODE + 'foundation-sites/js/foundation.util.timerAndImageLoader.js',
         // paths.NODE + 'foundation-sites/js/foundation.util.touch.js',
         paths.NODE + 'foundation-sites/js/foundation.util.triggers.js',
-        paths.NODE + 'foundation-sites/js/foundation.abide.js',
         // paths.NODE + 'foundation-sites/js/foundation.accordion.js',
         // paths.NODE + 'foundation-sites/js/foundation.accordionMenu.js',
         // paths.NODE + 'foundation-sites/js/foundation.drilldown.js',

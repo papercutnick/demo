@@ -46,9 +46,4 @@
 
 @include('pagination.default', ['paginator' => $groups])
 
-{{-- route('group.destroy', ['group' => $group->id, '_method'=>'DELETE']) --}}
-
-@endsection
-
-@section('script')
 @endsection
