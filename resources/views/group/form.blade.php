@@ -5,15 +5,12 @@
 @include('errors.default')
 
 @if ($action === 'create')
-{{ Form::open(array('route' => 'group.store')) }}
+{{ Form::open(array('route' => 'group.store', 'data-abide'=>'data-abide')) }}
 @else
 
-{{ Form::model($group, array('route' => array('group.update', $group->id), 'method' => 'PUT')) }}
+{{ Form::model($group, array('route' => array('group.update', $group->id), 'method' => 'PUT', 'data-abide'=>'data-abide')) }}
 @endif
-<div data-abide-error class="alert callout" style="display: none;">
-    <p><i class="fi-alert"></i> There are some errors in your form.</p>
-  </div>
-<div class="row">
+<div class="row grpInfo" data-abide>
 	<fieldset class="fieldset">
 		<legend>Group Information</legend>
 		<div class="small-6 columns">
@@ -34,6 +31,7 @@
 				</div>
 				<div class="small-8 columns">
 					{{ Form::text('description') }}
+					<span class="form-error">This field is required.</span>
 				</div>
 			</div>
 		</div>
@@ -49,6 +47,7 @@
 			</div>
 			<div class="small-8 columns">
 				{{ Form::text('netID') }}
+				<span class="form-error">This field is required.</span>
 			</div>
 		</div>
 		<div class="small-4 columns">
@@ -57,6 +56,7 @@
 			</div>
 			<div class="small-8 columns">
 				{{ Form::text('firstName') }}
+				<span class="form-error">This field is required.</span>
 			</div>
 		</div>
 		<div class="small-4 columns">
@@ -65,6 +65,7 @@
 			</div>
 			<div class="small-8 columns">
 				{{ Form::text('lastName') }}
+				<span class="form-error">This field is required.</span>
 			</div>
 		</div>
 		<div class="small-1 columns">
@@ -74,7 +75,7 @@
 	</fieldset>
 </div>
 
-<div class="row">
+<div class="row grpInfo" data-abide>
 	<table class="hover">
 		<thead>
 			<tr>
@@ -89,7 +90,7 @@
 	</table>
 
 	{{ Form::button('Submit', array('class' => 'hollow button',
-		'onclick'=>'check(this)')) }}
+		'onclick'=> 'check()')) }}
 </div>
 
 {{ Form::close() }}
@@ -108,7 +109,7 @@
         			$lastName =  $oldInput["_lastName"];
         			foreach ($netID as $key => $value){ ?>
         				addRow('{{$netID[$key]}}', '{{$firstName[$key]}}', '{{$lastName[$key]}}');
-        	<?php		}
+        	<?php	}
         		}
 			?>
 		@else
@@ -120,22 +121,25 @@
 	  	@endif
 
 	  	//initialize js validation
-	  	$("form:first").attr({"data-abide":"", "id":"testtest"});
 	  	$("[type=text]").prop("required","required");
 	});
 
      function addRow(netID, firstName, lastName){
      	var link = "<a href='#'' onclick='deleteRow(this)'>delete</a>";
      	
-     	var row = "<tr><td>"
-     			  +"<input type='text' name='_netID[]' value='"+netID+"' />"
+     	var row = $("<tr data-abide><td>"
+     			  +"<input type='text' name='_netID[]' required value='"+netID+"'/>"
+     			  +"<span class='form-error'>This field is required.</span>"
      			  +"</td><td>"
-     			  +"<input type='text' name='_firstName[]' value='"+firstName+"' />"
+     			  +"<input type='text' name='_firstName[]' required value='"+firstName+"'/>"
+     			  +"<span class='form-error'>This field is required.</span>"
      			  +"</td><td>"
-     			  +"<input type='text' name='_lastName[]' value='"+lastName+"' />"
+     			  +"<input type='text' name='_lastName[]' required value='"+lastName+"'/>"
+     			  +"<span class='form-error'>This field is required.</span>"
      			  +"</td><td>"+link
-     			  +"</td></tr>";
-     	$("tbody").append(row);
+     			  +"</td></tr>");
+     	var temp = $("tbody").append(row);
+     	$("#testtest").foundation();
      }
 
      function deleteRow(obj){
@@ -147,9 +151,9 @@
 
 @section('postscript')
 <script>
-	function check(obj){
-     	//$(obj).parents("form").foundation("validateForm");
-     	$("#testtest").foundation("validateForm");
+	function check(){
+		//$("#test").foundation();
+     	$(".grpInfo").foundation("validateForm");
      	return false;
      }
 </script>

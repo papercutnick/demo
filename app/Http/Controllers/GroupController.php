@@ -82,7 +82,9 @@ class GroupController extends Controller
     {
         $group = Group::find($id);
 
-        //Debugbar::info($group);
+        //Debugbar::info($group->owners());
+
+        //var_dump($group->owners());
 
         return view('group.form', ['action' => 'edit', 'group' => $group]);
     }
