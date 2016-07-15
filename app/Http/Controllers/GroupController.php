@@ -17,10 +17,11 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $groups = Group::paginate(15);
 
+        $request->session()->put("paginator",$groups);
 
         return view('group.index', ['groups' => $groups]);
     }

@@ -5,12 +5,12 @@
 @include('errors.default')
 
 @if ($action === 'create')
-{{ Form::open(array('route' => 'group.store', 'data-abide'=>'data-abide')) }}
+{{ Form::open(array('route' => 'group.store', 'id' => 'groupForm')) }}
 @else
 
-{{ Form::model($group, array('route' => array('group.update', $group->id), 'method' => 'PUT', 'data-abide'=>'data-abide')) }}
+{{ Form::model($group, array('route' => array('group.update', $group->id), 'method' => 'PUT', 'id'=>'group')) }}
 @endif
-<div class="row grpInfo" data-abide>
+<div class="row grpInfo" data-abide novalidate>
 	<fieldset class="fieldset">
 		<legend>Group Information</legend>
 		<div class="small-6 columns">
@@ -38,7 +38,7 @@
 	</fieldset>
 </div>
 
-<div class="row">
+<div class="row ownerInfo" data-abide novalidate>
 	<fieldset class="fieldset">
 		<legend>Owner Information</legend>
 		<div class="small-3 columns">
@@ -70,12 +70,12 @@
 		</div>
 		<div class="small-1 columns">
 			{{ Form::button('Add', array('class' => 'hollow button', 
-			   'onclick' => 'addRow($("#netID").val(), $("#firstName").val(), $("#lastName").val())')) }}
+			   'onclick' => 'checkInput()')) }}
 		</div>
 	</fieldset>
 </div>
 
-<div class="row grpInfo" data-abide>
+<div class="row">
 	<table class="hover">
 		<thead>
 			<tr>
@@ -90,7 +90,12 @@
 	</table>
 
 	{{ Form::button('Submit', array('class' => 'hollow button',
-		'onclick'=> 'check()')) }}
+		'onclick'=> 'checkForm()')) }}
+
+	&nbsp;&nbsp;&nbsp;
+
+	{{ Form::button('Cancel', array('class' => 'hollow button',
+		'onclick'=> 'goBack()')) }}
 </div>
 
 {{ Form::close() }}
@@ -107,7 +112,8 @@
 					$netID = $oldInput["_netID"];
         			$firstName =  $oldInput["_firstName"];
         			$lastName =  $oldInput["_lastName"];
-        			foreach ($netID as $key => $value){ ?>
+        			foreach ($netID as $key => $value){ 
+        	?>
         				addRow('{{$netID[$key]}}', '{{$firstName[$key]}}', '{{$lastName[$key]}}');
         	<?php	}
         		}
@@ -121,13 +127,20 @@
 	  	@endif
 
 	  	//initialize js validation
+	  	//Foundation.Abide.defaults.liveValidate = true;
 	  	$("[type=text]").prop("required","required");
+
+	  	//$(document).on("formvalid.zf.abide", function(ev,elem){
+	  		//$("#group").submit();
+	  	//})
 	});
+
+
 
      function addRow(netID, firstName, lastName){
      	var link = "<a href='#'' onclick='deleteRow(this)'>delete</a>";
      	
-     	var row = $("<tr data-abide><td>"
+     	var row = $("<tr data-abide novalidate class='grpInfo'><td>"
      			  +"<input type='text' name='_netID[]' required value='"+netID+"'/>"
      			  +"<span class='form-error'>This field is required.</span>"
      			  +"</td><td>"
@@ -138,8 +151,7 @@
      			  +"<span class='form-error'>This field is required.</span>"
      			  +"</td><td>"+link
      			  +"</td></tr>");
-     	var temp = $("tbody").append(row);
-     	$("#testtest").foundation();
+     	var temp = $("tbody").append(row).foundation();
      }
 
      function deleteRow(obj){
@@ -151,10 +163,30 @@
 
 @section('postscript')
 <script>
-	function check(){
-		//$("#test").foundation();
-     	$(".grpInfo").foundation("validateForm");
-     	return false;
-     }
+	function checkForm(){
+     	//var result = $(".grpInfo").foundation("validateForm");
+
+     	if(validate(".grpInfo")){
+     		$("#groupForm").submit();
+     	}
+    }
+
+    function checkInput(){
+    	if(validate(".ownerInfo")){
+     		addRow($("#netID").val(), $("#firstName").val(), $("#lastName").val());
+    	}
+    }
+
+    function validate(str){
+    	var elem = new Foundation.Abide($(str));
+     	return elem.validateForm();
+    }
+
+    function goBack(){
+    	<?php
+		   $paginator = Session::get("paginator")		
+        ?>
+    	window.location.href = "{{ $paginator->url($paginator->currentPage()) }}";
+    }
 </script>
 @endsection
