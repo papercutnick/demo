@@ -8,7 +8,7 @@
 {{ Form::open(array('route' => 'group.store', 'id' => 'groupForm')) }}
 @else
 
-{{ Form::model($group, array('route' => array('group.update', $group->id), 'method' => 'PUT', 'id'=>'group')) }}
+{{ Form::model($group, array('route' => array('group.update', $group->id), 'method' => 'PUT', 'id'=>'groupForm')) }}
 @endif
 <div class="row grpInfo" data-abide novalidate>
 	<fieldset class="fieldset">
@@ -128,7 +128,7 @@
 
 	  	//initialize js validation
 	  	//Foundation.Abide.defaults.liveValidate = true;
-	  	$("[type=text]").prop("required","required");
+	  	$("[type=text]").prop({"required":"required"});
 
 	  	//$(document).on("formvalid.zf.abide", function(ev,elem){
 	  		//$("#group").submit();

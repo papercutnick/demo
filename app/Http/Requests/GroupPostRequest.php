@@ -27,7 +27,7 @@ class GroupPostRequest extends Request
         return [
             'name' => 'bail|required|max:255',
             'description' => 'required',
-            '_netID.*' => 'required|unique:users,netid',
+            '_netID.*' => 'required',//|unique:users,netid',
             '_firstName.*' => 'required',
             '_lastName.*' => 'required',
         ];

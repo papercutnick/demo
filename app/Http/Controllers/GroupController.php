@@ -52,9 +52,21 @@ class GroupController extends Controller
         $group = Group::create($request->only(['name', 'description']));
 
         foreach($netID as $key => $value ) {
-            $group->owners()->save(User::create(['netid' => $netID[$key],
-                                                 'first_name'=>$firstName[$key], 
-                                                 'last_name'=>$lastName[$key]]));
+            $tmp = ['netid' => $netID[$key],
+                    'first_name'=>$firstName[$key], 
+                    'last_name'=>$lastName[$key]];
+
+            $owner = User::where('netid',$netID[$key])->first();
+
+            //var_dump(!$owner);
+            //die();
+
+            if(!$owner){
+                $group->owners()->save(User::create($tmp)); // no unique constraint check
+            }else{
+                $owner->update($tmp);
+                $group->owners()->save($owner);
+            }
         }
 
         DB::commit();
@@ -83,7 +95,7 @@ class GroupController extends Controller
     {
         $group = Group::find($id);
 
-        //Debugbar::info($group->owners());
+        //Debugbar::info($r->owners());
 
         //var_dump($group->owners());
 
@@ -100,6 +112,7 @@ class GroupController extends Controller
     public function update(GroupPostRequest $request, $id)
     {
         // Validate the request...
+
         $group = Group::find($id);
 
         $netID = $request->input("_netID");
@@ -111,9 +124,21 @@ class GroupController extends Controller
 
         $group->owners()->detach();
         foreach($netID as $key => $value ) {
-            $group->owners()->save(User::create(['netid' => $netID[$key],
-                                                 'first_name'=>$firstName[$key], 
-                                                 'last_name'=>$lastName[$key]])); // no unique constraint check
+            $tmp = ['netid' => $netID[$key],
+                    'first_name'=>$firstName[$key], 
+                    'last_name'=>$lastName[$key]];
+
+            $owner = User::where('netid',$netID[$key])->first();
+
+            //var_dump(!$owner);
+            //die();
+
+            if(!$owner){
+                $group->owners()->save(User::create($tmp)); // no unique constraint check
+            }else{
+                $owner->update($tmp);
+                $group->owners()->save($owner);
+            }
         }
 
         DB::commit();
